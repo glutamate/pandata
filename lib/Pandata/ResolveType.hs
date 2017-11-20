@@ -8,4 +8,8 @@ typeOf :: V -> T
 typeOf (VInt _) = TCon "Int"
 
 generalise :: T -> T -> T
-generalise t1 t2 = Sum [t1, t2]
+generalise (TCon "Int") (TCon "Double") = (TCon "Double")
+generalise t1 t2 = flatSum $ Sum [t1, t2]
+
+flatSum :: T -> T
+flatSum t = t
