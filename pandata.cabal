@@ -44,4 +44,6 @@ Library
                  , text
                  , time
                  , vector
+                 , containers
                  , wreq
+                 , streaming
