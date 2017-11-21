@@ -12,8 +12,6 @@ import qualified Streaming.Prelude as S
 import Streaming.Prelude (Stream, Of)
 import Data.ByteString (ByteString)
 
-
-
 data T = TCon Text -- primitives
        | Enum (Set Text) -- enumeration types. E.g. sequence data
        | Array T
@@ -46,7 +44,13 @@ hasSeq (Prod ts) = any hasSeq ts
 hasSeq (Enum _) = False
 hasSeq (TCon _) = False
 
-data Portal ds = Portal
-  {
-
+data DataFormat ident = DataFormat
+  { newDataset :: ident -> T -> IO ident
+  , getReader :: ident -> DatasetReader
+  , getWriter :: ident -> DatasetWriter
+  , isTypeWritable :: T -> Bool
   }
+
+type DatasetWriter = T -> V -> IO ()
+type DatasetReader = IO (T,V)
+

@@ -33,6 +33,9 @@ Library
                    Pandata.Types
                    Pandata.Syntax
                    Pandata.ResolveType
+                   Pandata.Format.CSV
+                   Pandata.Format.JSON
+                   Pandata.Format.PostgreSQL
    Build-depends:
                    base                    >= 4.6 && < 5
                  , aeson
