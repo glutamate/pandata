@@ -2,16 +2,37 @@ module Pandata.Format.CSV (csvFmt) where
 
 import Data.Text (Text)
 import qualified Data.Text as T
+import qualified Data.Text.IO as T
 import qualified Data.Map.Strict as Map
 import Pandata.Types
 import Data.Csv
 import qualified Data.Set as Set
+import System.Directory
+import System.FilePath
+import System.IO
 
 csvFmt :: DataFormat FilePath
 csvFmt = DataFormat
   { isTypeWritable = checkType
   , knownExtensions = Set.fromList ["csv"]
+  , newDataset = getNewFile
   }
+
+writeFile:: FilePath-> T-> V-> IO ()
+writeFile fp t v = withFile fp WriteMode $ \h -> writeAll h t v
+  
+writeAll h (Sequence (Rec nmts)) v = writeHeader h nmts
+writeAll h (Array (Rec nmts)) v = writeHeader h nmts
+
+writeHeader h = T.hPutStrLn h . T.intercalate "," . Map.keys 
+
+getNewFile :: FilePath -> T -> IO FilePath
+getNewFile fp _ = do
+  ex <- doesFileExist fp
+  if ex 
+    then return fp -- TO DO increment file name
+    else return fp
+
 
 checkType :: T -> Bool
 checkType (Array t) = okRowT t

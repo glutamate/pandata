@@ -36,6 +36,7 @@ Library
                    Pandata.Format.CSV
                    Pandata.Format.JSON
                    Pandata.Format.PostgreSQL
+                   Pandata.Utils
    Build-depends:
                    base                    >= 4.6 && < 5
                  , aeson
@@ -50,3 +51,5 @@ Library
                  , containers
                  , wreq
                  , streaming
+                 , filepath
+                 , directory
