@@ -10,7 +10,7 @@ import qualified Data.Set as Set
 csvFmt :: DataFormat FilePath
 csvFmt = DataFormat
   { isTypeWritable = checkType
-
+  , knownExtensions = Set.fromList ["csv"]
   }
 
 checkType :: T -> Bool

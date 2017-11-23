@@ -49,6 +49,7 @@ data DataFormat ident = DataFormat
   , getReader :: ident -> DatasetReader
   , getWriter :: ident -> DatasetWriter
   , isTypeWritable :: T -> Bool
+  , knownExtensions :: Set Text
   }
 
 type DatasetWriter = T -> V -> IO ()
