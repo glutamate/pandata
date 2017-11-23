@@ -4,5 +4,5 @@ module Pandata.Utils where
 incrementIdentifier :: String -> IO String
 incrementIdentifier s =
   case reverse s of
-    d1:d2:d3:_:rest -> s
-    _ -> s
+    d1:d2:d3:_:rest -> return s
+    _ -> return s
